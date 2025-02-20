@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajid Mehmood</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="photo.jpeg" alt="Logo">
+        </div>
+        <h1>Sajid Mehmood</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#blog">Weekly Blog</a></li>
+                <li><a href="#meetings">Supervisor Meetings</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#project">Project Details</a></li>
+                <li><a href="#contact-form">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am a final-year student pursuing a degree in Information Technology (IT) at Middlesex University,
+            expected to graduate in April 2025. My academic journey has equipped me with a strong foundation in IT,
+            and I am passionate about leveraging technology to address real-world challenges. My final-year project
+            focuses on virtual classroom,
+            a topic that aligns with global efforts to revolutionize education by making it more accessible, inclusive,
+            and technologically advanced.
+            By integrating AI and innovative features, the project
+            aims to enhance the learning experience while promoting sustainability in education through reduced reliance
+            on physical resources.</p>
+    </section>
+
+    <section id="blog">
+        <h2>Weekly Blog Posts</h2>
+        <p>This section will be updated weekly with progress reports, reflections, and challenges encountered during the
+            project.
+            It will also include insights gained from research and supervisor meetings.</p>
+    </section>
+
+    <section id="meetings">
+        <h2>Supervisor Meeting Log</h2>
+
+        <div class="meeting-input">
+            <label for="meeting-date">Meeting Date:</label>
+            <input type="date" id="meeting-date" required>
+            <br>
+            <label for="meeting-time">Meeting Time:</label>
+            <div class="time-container">
+                <input type="time" id="meeting-time" required>
+                <select id="meeting-ampm">
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                </select>
+            </div>
+
+            <button onclick="addMeeting()">Add Meeting</button>
+        </div>
+
+        <ul id="meeting-log"></ul>
+    </section>
+
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-container">
+            <div class="image-box">
+                <img src="images.jpeg" alt="Project Image 1">
+                <p>Image Description 1</p>
+            </div>
+            <div class="image-box">
+                <img src="login page.png" alt="Project Image 2">
+                <p>Image Description 2</p>
+            </div>
+            <div class="image-box">
+                <img src="home page.png" alt="Project Image 3">
+                <p>Image Description 3</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="project">
+        <h2>Problem Statement:</h2>
+        <p>High Licensing Costs: Many virtual classroom solutions
+            require expensive licenses, making them inaccessible to smaller institutions and individual educators.</p>
+        <p>Lack of Personalization: Traditional online learning platforms often fail to provide personalized support,
+            leading to a one-size-fits-all approach that does not cater to individual learning needs.</p>
+        <p>Limited Collaboration Tools: Many platforms lack seamless integration of real-time collaboration
+            tools, hindering effective communication and interaction between educators and students.</p>
+        <p>Sustainability Challenges: Most educational platforms rely on subscription fees, which can
+            be prohibitive for some users, limiting their accessibility and long-term sustainability. </p>
+
+
+        <h3>Objectives:</h3>
+        <ul>
+            <li>To design and implement a web-based virtual classroom system with unlimited session capability.</li>
+            <li>To integrate AI-powered features for personalized learning assistance and student support.</li>
+            <li>To develop a donation-based payment system to ensure platform sustainability.</li>
+            <li>To create an intuitive user interface for both educators and students.</li>
+            <li>To implement real-time collaboration tools and interactive learning features.</li>
+            <li>To ensure the platform is accessible to users with varying levels of technical expertise.</li>
+            <li>To provide automated content recommendations based on individual learning patterns.</li>
+            <li>To incorporate intelligent tutoring systems for real-time feedback and guidance.</li>
+            <li>To evaluate the effectiveness of the platform through user testing and feedback.</li>
+            <li>To contribute to the broader goal of making quality education accessible to all.</li>
+        </ul>
+    </section>
+
+    <section id="contact-form">
+        <div class="contact-form">
+            <h2>Contact Me</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" value="Sajid Mehmood" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="Sajid.teech@gmail.com" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="Mobile Number">Mobile Number</label>
+                    <input type="email" id="Mobile Number" value="+971 0582424007" readonly>
+                </div>
+                <div class="form-group social-media">
+                    <label>Connect with Me</label>
+                    <div class="icons">
+                        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+</body>
+
+</html>
