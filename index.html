@@ -17,13 +17,12 @@
         </div>
         <nav>
             <ul>
-                <h1>Sajid Mehmood</h1>
                 <li><a href="#about">About Me</a></li>
                 <li><a href="#blog">Weekly Blog</a></li>
                 <li><a href="#meetings">Supervisor Meetings</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#project">Project Details</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact-form">Contact</a></li> <!-- Updated href to match the section id -->
             </ul>
         </nav>
     </header>
@@ -55,20 +54,23 @@
     <section id="meetings">
         <h2>Supervisor Meeting Log</h2>
 
+        <!-- Edit Mode Button (Only for authorized users) -->
+        <button id="edit-mode-toggle">Enable Edit Mode</button>
+
         <div class="meeting-input">
             <label for="meeting-date">Meeting Date:</label>
-            <input type="date" id="meeting-date" required>
+            <input type="date" id="meeting-date" required disabled>
             <br>
             <label for="meeting-time">Meeting Time:</label>
             <div class="time-container">
-                <input type="time" id="meeting-time" required>
-                <select id="meeting-ampm">
+                <input type="time" id="meeting-time" required disabled>
+                <select id="meeting-ampm" disabled>
                     <option value="AM">AM</option>
                     <option value="PM">PM</option>
                 </select>
             </div>
 
-            <button onclick="addMeeting()">Add Meeting</button>
+            <button onclick="addMeeting()" id="add-meeting-button" disabled>Add Meeting</button>
         </div>
 
         <ul id="meeting-log"></ul>
@@ -119,7 +121,7 @@
         </ul>
     </section>
 
-    <section id="contact-form">
+    <section id="contact-form"> <!-- Ensure this id matches the href in the navigation link -->
         <div class="contact-form">
             <h2>Contact Me</h2>
             <form>
