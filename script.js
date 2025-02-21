@@ -1,3 +1,4 @@
+// Function to add a meeting to the log
 function addMeeting() {
     const date = document.getElementById("meeting-date").value;
     let time = document.getElementById("meeting-time").value;
@@ -15,14 +16,48 @@ function addMeeting() {
         }
 
         const formattedTime = `${String(hours).padStart(2, "0")}:${minutes} ${ampm}`;
+        const meetingEntry = `Meeting on ${date} at ${formattedTime}`;
+
+        // Create a new list item
         const newEntry = document.createElement("li");
-        newEntry.textContent = `Meeting on ${date} at ${formattedTime}`;
+        newEntry.textContent = meetingEntry;
         log.appendChild(newEntry);
+
+        // Save the meeting to localStorage
+        saveMeetingToStorage(meetingEntry);
     } else {
         alert("Please enter both date and time.");
     }
 }
 
+// Function to save a meeting to localStorage
+function saveMeetingToStorage(meetingEntry) {
+    let meetings = JSON.parse(localStorage.getItem("meetings")) || [];
+    meetings.push(meetingEntry);
+    localStorage.setItem("meetings", JSON.stringify(meetings));
+}
+
+// Function to load meetings from localStorage
+function loadMeetingsFromStorage() {
+    const log = document.getElementById("meeting-log");
+    const meetings = JSON.parse(localStorage.getItem("meetings")) || [];
+
+    meetings.forEach((meeting) => {
+        const newEntry = document.createElement("li");
+        newEntry.textContent = meeting;
+        log.appendChild(newEntry);
+    });
+}
+
+// Function to reset the meeting history
+function resetHistory() {
+    const log = document.getElementById("meeting-log");
+    log.innerHTML = ""; // Clear the displayed log
+    localStorage.removeItem("meetings"); // Clear the stored meetings
+    alert("Meeting history has been reset.");
+}
+
+// Function to add an image to the gallery
 function addImage() {
     const gallery = document.getElementById("gallery-container");
     const imageInput = document.createElement("input");
@@ -45,6 +80,7 @@ function addImage() {
     imageInput.click();
 }
 
+// Back-to-top button functionality
 const backToTopButton = document.getElementById("backToTop");
 
 window.onscroll = function () {
@@ -62,7 +98,10 @@ backToTopButton.addEventListener("click", function () {
     });
 });
 
+// Mobile menu toggle functionality
 document.addEventListener("DOMContentLoaded", function () {
+    loadMeetingsFromStorage(); // Load saved meetings when the page loads
+
     const menuToggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector("nav ul");
 
