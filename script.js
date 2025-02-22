@@ -1,140 +1,92 @@
-const API_KEY = "AIzaSyAkFdt_KpmazT8Jgs6piopY7QcRpAuJm0A"; // Your Google Sheets API Key
-const SHEET_ID = "1JciD2DbOqQ4fS-LcTFS_AlW_xLksYdmHNKziFl87Z48"; // Your Google Sheet ID
-
-// Function to add a meeting to the log
-async function addMeeting() {
-    const date = document.getElementById("meeting-date").value;
-    let time = document.getElementById("meeting-time").value;
-    const ampm = document.getElementById("meeting-ampm").value;
-    const log = document.getElementById("meeting-log");
-
-    if (date && time) {
-        let [hours, minutes] = time.split(":");
-        hours = parseInt(hours);
-
-        if (ampm === "PM" && hours < 12) {
-            hours += 12;
-        } else if (ampm === "AM" && hours === 12) {
-            hours = 0;
-        }
-
-        const formattedTime = `${String(hours).padStart(2, "0")}:${minutes} ${ampm}`;
-        const meetingEntry = `Meeting on ${date} at ${formattedTime}`;
-
-        // Create a new list item
-        const newEntry = document.createElement("li");
-        newEntry.textContent = meetingEntry;
-        log.appendChild(newEntry);
-
-        // Save the meeting to Google Sheets
-        await saveMeetingToSheet(date, time, ampm, meetingEntry);
-    } else {
-        alert("Please enter both date and time.");
-    }
+// Load Google's OAuth Client Library
+function handleClientLoad() {
+    gapi.load("client:auth2", initClient);
 }
 
-// Function to save a meeting to Google Sheets
-async function saveMeetingToSheet(date, time, ampm, meetingEntry) {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1!A1:D1:append?valueInputOption=USER_ENTERED`;
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${API_KEY}`,
-        },
-        body: JSON.stringify({
-            values: [[date, time, ampm, meetingEntry]],
-        }),
+// Initialize the Google API client
+function initClient() {
+    gapi.client.init({
+        clientId: "841283416700-ck0tgema93pjal7alradlc9pb82ggi3c.apps.googleusercontent.com",
+        clientSecret: "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",
+        discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+        scope: "https://www.googleapis.com/auth/spreadsheets"
+    }).then(() => {
+        console.log("Google API Client Initialized");
+    }).catch(error => {
+        console.error("Error initializing Google API client:", error);
     });
-
-    if (!response.ok) {
-        alert("Failed to save meeting. Please try again.");
-    }
 }
 
-// Function to load meetings from Google Sheets
-async function loadMeetings() {
-    const log = document.getElementById("meeting-log");
-    log.innerHTML = "";
-
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1!A2:D?key=${API_KEY}`;
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if (data.values) {
-        data.values.forEach((row) => {
-            const newEntry = document.createElement("li");
-            newEntry.textContent = row[3]; // Meeting Entry is in the 4th column
-            log.appendChild(newEntry);
+// Authenticate and fetch meeting log from Google Sheets
+function fetchGoogleSheet() {
+    gapi.auth2.getAuthInstance().signIn().then(() => {
+        gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: "1JciD2DbOqQ4fS-LcTFS_AlW_xLksYdmHNKziFl87Z48",
+            range: "Meetings!A1:D"
+        }).then(response => {
+            displayMeetingLogs(response.result.values);
+        }).catch(error => {
+            console.error("Error fetching meeting logs:", error);
         });
-    }
-}
-
-// Function to reset the meeting history
-async function resetHistory() {
-    const log = document.getElementById("meeting-log");
-    log.innerHTML = "";
-
-    // Clear all rows in the sheet (except the header)
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1!A2:D?key=${API_KEY}`;
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${API_KEY}`,
-        },
-        body: JSON.stringify({
-            values: [],
-        }),
     });
-
-    if (response.ok) {
-        alert("Meeting history has been reset.");
-    } else {
-        alert("Failed to reset history. Please try again.");
-    }
 }
 
-// Function to add an image to the gallery
-function addImage() {
-    const gallery = document.getElementById("gallery-container");
-    const imageInput = document.createElement("input");
-    imageInput.type = "file";
-    imageInput.accept = "image/*";
-    imageInput.onchange = function (event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const img = document.createElement("img");
-                img.src = e.target.result;
-                img.style.width = "200px";
-                img.style.margin = "10px";
-                gallery.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-    imageInput.click();
-}
-
-// Back-to-top button functionality
-const backToTopButton = document.getElementById("backToTop");
-
-window.onscroll = function () {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        backToTopButton.classList.add("visible");
-    } else {
-        backToTopButton.classList.remove("visible");
-    }
-};
-
-backToTopButton.addEventListener("click", function () {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+// Display meeting logs in the HTML table
+function displayMeetingLogs(data) {
+    const table = document.getElementById("meetingTable");
+    table.innerHTML = "<tr><th>Date</th><th>Time</th><th>Notes</th></tr>";
+    data.forEach(row => {
+        let tr = document.createElement("tr");
+        row.forEach(cell => {
+            let td = document.createElement("td");
+            td.textContent = cell;
+            tr.appendChild(td);
+        });
+        table.appendChild(tr);
     });
-});
+}
+
+// Add a new meeting log entry
+function addMeeting() {
+    const date = document.getElementById("meetingDate").value;
+    const time = document.getElementById("meetingTime").value;
+    const notes = document.getElementById("meetingNotes").value;
+
+    if (!date || !time || !notes) {
+        alert("Please fill in all fields");
+        return;
+    }
+
+    gapi.auth2.getAuthInstance().signIn().then(() => {
+        const values = [[date, time, notes]];
+        gapi.client.sheets.spreadsheets.values.append({
+            spreadsheetId: "1JciD2DbOqQ4fS-LcTFS_AlW_xLksYdmHNKziFl87Z48",
+            range: "Meetings!A1:C",
+            valueInputOption: "RAW",
+            resource: { values }
+        }).then(() => {
+            console.log("Meeting added successfully");
+            fetchGoogleSheet();
+        }).catch(error => {
+            console.error("Error adding meeting:", error);
+        });
+    });
+}
+
+// Reset the meeting log (clear all data)
+function resetMeetingLog() {
+    gapi.auth2.getAuthInstance().signIn().then(() => {
+        gapi.client.sheets.spreadsheets.values.clear({
+            spreadsheetId: "1JciD2DbOqQ4fS-LcTFS_AlW_xLksYdmHNKziFl87Z48",
+            range: "Meetings!A1:D"
+        }).then(() => {
+            console.log("Meeting log cleared successfully");
+            fetchGoogleSheet();
+        }).catch(error => {
+            console.error("Error clearing meeting log:", error);
+        });
+    });
+}
 
 // Mobile menu toggle functionality
 document.addEventListener("DOMContentLoaded", function () {
@@ -145,22 +97,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     menuToggle.addEventListener("click", function () {
         nav.classList.toggle("active");
-        menuToggle.innerHTML = nav.classList.contains("active") ? "×" : "☰";
     });
 
-    // Close menu when clicking outside
-    document.addEventListener("click", function (e) {
-        if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-            nav.classList.remove("active");
-            menuToggle.innerHTML = "☰";
-        }
-    });
+    // Reset the meeting log (clear all data)
+    function resetMeetingLog() {
+        gapi.auth2.getAuthInstance().signIn().then(() => {
+            gapi.client.sheets.spreadsheets.values.clear({
+                spreadsheetId: "1JciD2DbOqQ4fS-LcTFS_AlW_xLksYdmHNKziFl87Z48",
+                range: "Meetings!A1:D"
+            }).then(() => {
+                console.log("Meeting log cleared successfully");
+                fetchGoogleSheet();
+            }).catch(error => {
+                console.error("Error clearing meeting log:", error);
+            });
+        });
+    }
 
-    // Close menu when window is resized to desktop view
-    window.addEventListener("resize", function () {
-        if (window.innerWidth >= 768) {
-            nav.classList.remove("active");
-            menuToggle.innerHTML = "☰";
-        }
-    });
-});         
+    // Load client library on window load
+    window.onload = handleClientLoad;
+});
+
+// JavaScript to toggle the mobile menu
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
