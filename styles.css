@@ -630,6 +630,7 @@ button:disabled {
 }
 
 /* About Section Styles */
+/* About Section Styles */
 #about {
     padding: 30px;
     background: #FFFFFF; /* White */
@@ -652,18 +653,18 @@ button:disabled {
 }
 
 .about-logo {
-    width: 330px; /* Adjust size as needed */
-    height: 300px; /* Make it a circle */
-    border-radius: 30%; /* Shape it into a circle */
+    width: 500px; /* Adjust size as needed */
+    height: 500px; /* Make it a circle */
+    border-radius: 10%; /* Shape it into a circle */
     overflow: hidden;
     background: #556B2F; /* Olive Green */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .about-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 150px;
+    height: 100px;
+    object-fit: cover; /* Ensures the image covers the container */
 }
 
 .about-right {
@@ -688,4 +689,30 @@ button:disabled {
     font-size: 1rem;
     color: #000000; /* Black */
     line-height: 1.6; /* Improve readability */
+}
+/* Content Container Styles */
+.content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between items */
+    padding: 20px;
+    background: #FFFFFF; /* White background */
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    max-width: 300px; /* Adjust width as needed */
+    margin: 0 auto; /* Center the container */
+}
+
+.content-item {
+    font-size: 18px; /* Adjust font size as needed */
+    font-weight: 600; /* Bold text */
+    color: #000000; /* Black text color */
+    padding: 10px;
+    border-left: 4px solid #556B2F; /* Olive Green accent */
+    transition: all 0.3s ease;
+}
+
+.content-item:hover {
+    background-color: rgba(85, 107, 47, 0.1); /* Light Olive Green on hover */
+    transform: translateX(5px); /* Slight move on hover */
 }

@@ -7,7 +7,6 @@
     <title>Sajid Mehmood</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
 </head>
 
 <body>
@@ -25,15 +24,15 @@
         </nav>
         <button class="menu-toggle">☰</button> <!-- Mobile menu toggle -->
     </header>
-    
+
     <button class="back-to-top" id="backToTop" title="Back to Top">
         <i class="fas fa-arrow-up"></i>
     </button>
-    
+
     <section id="about">
         <div class="about-container">
             <div class="about-left">
-                <img src="photo.jpeg" alt="Sajid Mehmood" class="about-logo">
+                <img src="photo2.jpeg" alt="Sajid Mehmood" class="about-logo">
             </div>
             <div class="about-right">
                 <div class="about-name">Sajid Mehmood</div>
@@ -50,6 +49,7 @@
             </div>
         </div>
     </section>
+
     <section id="blog">
         <h2>Weekly Blog Posts</h2>
         <p>This section will be updated weekly with progress reports, reflections, and challenges encountered during the
@@ -157,6 +157,11 @@
 
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="script.js"></script>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+    </script>
 </body>
 
 </html>
