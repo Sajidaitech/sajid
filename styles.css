@@ -1,146 +1,229 @@
+/* Body Styles */
 body {
-    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(120deg, #f8f9fa, #e2e8f0);
-    color: #2d3748;
-    line-height: 1.7;
+    background: #FFFFFF; /* White */
+    color: #000000; /* Black */
+    line-height: 1.5;
+}
+
+/* Table Styles */
+table {
+    width: 100px;
+    border-collapse: collapse;
+    margin: 5px 0;
+}
+
+th, td {
+    padding: 8px; /* Adjust the padding to reduce space */
+    text-align: left;
+    border: 5px solid #E0E0E0; /* Light Gray */
+}
+
+th {
+    background-color: #556B2F; /* Olive Green */
+    color: #FFFFFF; /* White */
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #F5F5F5; /* Light Gray */
+}
+
+tr:hover {
+    background-color: #E0E0E0; /* Hover Gray */
 }
 
 /* Modern Header with Glassmorphism */
 header {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background: linear-gradient(135deg, #1a365d, #2c5282);
-    color: #ffffff;
-    padding: 1.5rem;
-    text-align: left;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    align-items: center;
+    justify-content: space-between; /* Align logo and nav to the sides */
+    background: #454545; /* White */
+    color: #000000; /* Black */
+    padding: 0rem 2rem; /* Add more horizontal padding */
     position: sticky;
     top: 0;
     z-index: 1000;
-    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
+/* Logo Container */
 .logo-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    gap: 6px; /* Space between logo and name */
 }
 
-.menu-toggle {
-    display: block;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.menu-toggle:hover {
-    transform: rotate(90deg);
-}
-
+/* Logo */
 .logo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    width: 60px; /* Adjust size as needed */
+    height: 60px; /* Make it a circle */
+    border-radius: 55%; /* Shape it into a circle */
     overflow: hidden;
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.logo:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    background: #556B2F; /* Olive Green */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 }
 
 .logo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
 }
 
-/* Modern Navigation */
+/* Name */
+.name {
+    font-size: 30px; /* Adjust size as needed */
+    font-weight: 600; /* Bold text */
+    color: #556B2F; /* Olive Green */
+    margin: 0; /* Remove default margin */
+}
+
+/* Navigation Menu */
 nav ul {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background: rgba(44, 62, 80, 0.95);
-    margin-top: 1rem;
-    padding: 0.5rem 0;
-    list-style: none;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-}
-
-nav ul.active {
     display: flex;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-nav ul li {
+    gap: 20px; /* Adjust spacing between navigation items */
+    list-style: none;
+    padding: 0;
     margin: 0;
-    padding: 0.7rem 0;
-    text-align: center;
-    position: relative;
-}
-
-nav ul li::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 5px;
-    left: 50%;
-    background-color: #4299e1;
-    transition: width 0.3s ease, left 0.3s ease;
-}
-
-nav ul li:hover::after {
-    width: 70%;
-    left: 15%;
 }
 
 nav ul li a {
-    color: #ffffff;
+    font-size: 16px; /* Adjust size as needed */
     text-decoration: none;
-    font-size: 1.1rem;
+    color: #000000; /* Black */
     transition: color 0.3s ease;
-    padding: 0.5rem 1rem;
-    display: inline-block;
 }
 
 nav ul li a:hover {
-    color: #4299e1;
+    color: #556B2F; /* Olive Green on hover */
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none; /* Hidden by default on desktop */
+    background: none;
+    border: none;
+    color: #000000; /* Black */
+    font-size: 24px; /* Adjust size as needed */
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    .menu-toggle {
+        display: block; /* Show toggle button on mobile */
+    }
+
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #FFFFFF; /* White */
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    nav ul {
+        flex-direction: column; /* Stack items vertically on mobile */
+        gap: 10px;
+        padding: 1rem;
+    }
+
+    nav ul li a {
+        font-size: 18px; /* Larger text for mobile */
+    }
+}
+
+/* Laptop/Desktop Styles */
+@media screen and (min-width: 768px) {
+    header {
+        padding: 1rem 5%;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .logo {
+        width: 100px; /* Increase the size for desktop */
+        height: 100px; /* Maintain circle shape */
+    }
+
+    nav {
+        position: static;
+        width: auto;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        background: transparent;
+        backdrop-filter: none;
+    }
+
+    nav ul {
+        display: flex;
+        gap: 2rem;
+    }
+
+    nav ul li {
+        padding: 0;
+        border: none;
+    }
+
+    nav ul li a {
+        font-size: 18px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        background: rgba(85, 107, 47, 0.1); /* Olive Green with transparency */
+        color: #556B2F; /* Olive Green */
+    }
+}
+
+/* Large Desktop Styles */
+@media screen and (min-width: 1200px) {
+    header {
+        padding: 1rem 10%;
+    }
+
+    .logo {
+        width: 120px; /* Further increase the size for large desktops */
+        height: 120px; /* Maintain circle shape */
+    }
+
+    nav ul {
+        gap: 3rem;
+    }
+
+    nav ul li a {
+        font-size: 20px;
+    }
 }
 
 /* Modern Card-Style Sections */
 section {
     padding: 30px;
-    background: #ffffff;
+    background: #FFFFFF; /* White */
     margin: 30px auto;
     max-width: 90%;
     border-radius: 16px;
@@ -154,11 +237,10 @@ section:hover {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
-/* Meeting Log Section with Modern UI */
-/* Supervisor Meeting Log Section */
+/* Meeting Log Section */
 #meetings {
     padding: 30px;
-    background: linear-gradient(135deg, #ffffff, #f7fafc);
+    background: #F5F5F5; /* Light Gray */
     margin: 30px auto;
     max-width: 90%;
     border-radius: 16px;
@@ -169,7 +251,7 @@ section:hover {
 #meetings h2 {
     font-size: 2rem;
     margin-bottom: 30px;
-    color: #2d3748;
+    color: #000000; /* Black */
     font-weight: 600;
     position: relative;
     display: inline-block;
@@ -180,7 +262,7 @@ section:hover {
     position: absolute;
     height: 3px;
     width: 60%;
-    background: linear-gradient(90deg, #4299e1, #63b3ed);
+    background: #556B2F; /* Olive Green */
     bottom: -10px;
     left: 20%;
     border-radius: 2px;
@@ -192,7 +274,7 @@ section:hover {
     align-items: center;
     gap: 15px;
     margin-bottom: 30px;
-    background: rgba(247, 250, 252, 0.8);
+    background: rgba(245, 245, 245, 0.8); /* Light Gray with transparency */
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
@@ -201,7 +283,7 @@ section:hover {
 
 .meeting-input label {
     font-size: 1rem;
-    color: #4a5568;
+    color: #000000; /* Black */
     margin-bottom: 5px;
     font-weight: 500;
 }
@@ -213,10 +295,10 @@ section:hover {
     max-width: 300px;
     padding: 12px 15px;
     font-size: 1rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    background-color: #f8f9fa;
-    color: #2d3748;
+    background: rgba(224, 224, 224, 0.12); /* Light Gray */
+    border: none;
+    border-radius: 12px;
+    color: #000000; /* Black */
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
 }
@@ -224,8 +306,8 @@ section:hover {
 .meeting-input input[type="date"]:focus,
 .meeting-input input[type="time"]:focus,
 .meeting-input select:focus {
-    border-color: #4299e1;
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+    background: rgba(224, 224, 224, 0.18); /* Light Gray */
+    box-shadow: 0 0 0 3px #556B2F; /* Olive Green */
     outline: none;
     transform: translateY(-2px);
 }
@@ -250,59 +332,55 @@ section:hover {
     width: 100%;
     max-width: 300px;
     padding: 14px 24px;
-    background: linear-gradient(135deg, #4299e1, #3182ce);
-    color: white;
+    background: #556B2F; /* Olive Green */
+    color: #FFFFFF; /* White */
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(49, 130, 206, 0.3);
+    box-shadow: 0 4px 10px rgba(85, 107, 47, 0.3); /* Olive Green */
 }
 
 .meeting-input button:hover {
-    background: linear-gradient(135deg, #3182ce, #2c5282);
+    background: #6B8E23; /* Light Olive Green */
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(49, 130, 206, 0.4);
+    box-shadow: 0 6px 15px rgba(107, 142, 35, 0.4); /* Light Olive Green */
 }
 
 .meeting-input button:active {
     transform: translateY(-1px);
 }
 
-/* Style for disabled inputs and buttons */
 input:disabled,
 select:disabled,
 button:disabled {
-    opacity: 0.7;
+    background-color: rgba(224, 224, 224, 0.12); /* Light Gray */
+    color: #98989D;
     cursor: not-allowed;
-    background-color: #e2e8f0;
-    color: #718096;
-    border-color: #cbd5e0;
     box-shadow: none;
 }
 
-/* Edit Mode Button */
 #edit-mode-toggle {
     display: block;
     margin: 10px auto;
     padding: 10px 20px;
-    background: linear-gradient(135deg, #4299e1, #3182ce);
-    color: white;
+    background: #556B2F; /* Olive Green */
+    color: #FFFFFF; /* White */
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(49, 130, 206, 0.3);
+    box-shadow: 0 4px 10px rgba(85, 107, 47, 0.3); /* Olive Green */
 }
 
 #edit-mode-toggle:hover {
-    background: linear-gradient(135deg, #3182ce, #2c5282);
+    background: #6B8E23; /* Light Olive Green */
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(49, 130, 206, 0.4);
+    box-shadow: 0 6px 15px rgba(107, 142, 35, 0.4); /* Light Olive Green */
 }
 
 #meeting-log {
@@ -314,19 +392,19 @@ button:disabled {
 }
 
 #meeting-log li {
-    background-color: #f8fafc;
+    background-color: #F5F5F5; /* Light Gray */
     padding: 15px 20px;
     margin-bottom: 15px;
-    border-radius: 10px;
-    border-left: 4px solid #4299e1;
+    border-radius: 12px;
+    border-left: 4px solid #556B2F; /* Olive Green */
     font-size: 1rem;
-    color: #2d3748;
+    color: #000000; /* Black */
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
 }
 
 #meeting-log li:hover {
-    background-color: #edf2f7;
+    background-color: #E0E0E0; /* Hover Gray */
     transform: translateX(5px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
 }
@@ -335,27 +413,27 @@ button:disabled {
     display: block;
     margin: 30px auto;
     padding: 14px 28px;
-    background: linear-gradient(135deg, #f56565, #e53e3e);
-    color: white;
+    background: #FF3B30; /* Red */
+    color: #FFFFFF; /* White */
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(229, 62, 62, 0.3);
+    box-shadow: 0 4px 10px rgba(255, 59, 48, 0.3); /* Red */
 }
 
 .reset-button:hover {
-    background: linear-gradient(135deg, #e53e3e, #c53030);
+    background: #FF2D55; /* Darker Red */
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(229, 62, 62, 0.4);
+    box-shadow: 0 6px 15px rgba(255, 59, 48, 0.4); /* Darker Red */
 }
 
 /* Modern Gallery with Hover Effects */
 #gallery {
     padding: 30px;
-    background: linear-gradient(135deg, #f7fafc, #edf2f7);
+    background: #FFFFFF; /* White */
     margin: 30px auto;
     max-width: 90%;
     text-align: center;
@@ -366,7 +444,7 @@ button:disabled {
 #gallery h2 {
     font-size: 2rem;
     margin-bottom: 30px;
-    color: #2d3748;
+    color: #000000; /* Black */
     font-weight: 600;
     position: relative;
     display: inline-block;
@@ -377,7 +455,7 @@ button:disabled {
     position: absolute;
     height: 3px;
     width: 60%;
-    background: linear-gradient(90deg, #4299e1, #63b3ed);
+    background: #556B2F; /* Olive Green */
     bottom: -10px;
     left: 20%;
     border-radius: 2px;
@@ -391,8 +469,8 @@ button:disabled {
 }
 
 .image-box {
-    background-color: #ffffff;
-    border-radius: 12px;
+    background-color: #FFFFFF; /* White */
+    border-radius: 13px;
     padding: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.4s ease;
@@ -407,7 +485,7 @@ button:disabled {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(66, 153, 225, 0.2), rgba(99, 179, 237, 0.1));
+    background: linear-gradient(45deg, rgba(85, 107, 47, 0.2), rgba(107, 142, 35, 0.1)); /* Olive Green and Light Olive Green */
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: 1;
@@ -427,7 +505,7 @@ button:disabled {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 12px;
     transition: transform 0.5s ease;
 }
 
@@ -436,7 +514,7 @@ button:disabled {
 }
 
 .image-box p {
-    color: #4a5568;
+    color: #000000; /* Black */
     font-size: 1.1rem;
     margin-top: 15px;
     font-weight: 500;
@@ -446,17 +524,18 @@ button:disabled {
 
 /* Modern Contact Form with Glassmorphism */
 .contact-form {
-    background-color: #2C3E50;
+    background-color: rgba(255, 255, 255, 0.95); /* White with transparency */
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 13px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     margin: 2rem auto;
     text-align: center;
+    backdrop-filter: blur(10px);
 }
 
 .contact-form h2 {
-    color: white;
+    color: #000000; /* Black */
     margin-bottom: 1.5rem;
     text-align: center;
 }
@@ -469,152 +548,144 @@ button:disabled {
 .form-group label {
     display: block;
     margin-bottom: 0.3rem;
-    color: #B2BEC3;
+    color: #000000; /* Black */
 }
 
-.form-group input {
-    width: 90%;
-    padding: 0.5rem;
-    border: 1px solid #6f8296;
-    /* Lighter border color */
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* Lighter background */
-    color: white;
-    font-size: 1rem;
-    margin: 0 auto;
-}
-
-.form-group input:read-only {
-    background-color: rgba(255, 255, 255, 0.08);
-    /* Even lighter for readonly */
-    border-color: #5d7185;
-    /* Subtle border for readonly fields */
-    cursor: default;
-}
-
+/* Social Media Icons - Large size */
 .social-media .icons {
     display: flex;
-    gap: 1rem;
-    margin-top: 0.5rem;
+    gap: 2rem;
+    margin-top: 1.5rem;
     justify-content: center;
+    align-items: center;
 }
 
 .social-media .icons a {
-    color: white;
-    font-size: 1.5rem;
-    transition: color 0.3s;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background: #556B2F; /* Olive Green */
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-media .icons a i {
+    font-size: 30px;
+    color: #FFFFFF; /* White */
 }
 
 .social-media .icons a:hover {
-    color: #3498DB;
+    transform: translateY(-5px) scale(1.1);
+    background: #6B8E23; /* Light Olive Green */
+    box-shadow: 0 8px 20px rgba(107, 142, 35, 0.3); /* Light Olive Green */
 }
 
-/* Modern Back to Top Button */
+/* Specific icon colors on hover */
+.social-media .icons a[href*="linkedin"]:hover {
+    background: #0077B5; /* LinkedIn Blue */
+}
+
+.social-media .icons a[href*="facebook"]:hover {
+    background: #1877F2; /* Facebook Blue */
+}
+
+.social-media .icons a[href*="whatsapp"]:hover {
+    background: #25D366; /* WhatsApp Green */
+}
+
+/* Back-to-Top Button */
 .back-to-top {
+    display: none; /* Hidden by default */
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #4299e1, #3182ce);
-    color: white;
+    background: #556B2F; /* Olive Green */
+    color: #FFFFFF; /* White */
+    border: none;
+    border-radius: 50%; /* Circular button */
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    opacity: 0;
-    transition: all 0.4s ease;
+    font-size: 20px;
     cursor: pointer;
-    border: none;
-    box-shadow: 0 5px 15px rgba(66, 153, 225, 0.3);
-    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(85, 107, 47, 0.3); /* Olive Green */
+    transition: all 0.3s ease;
+    z-index: 1000; /* Ensure it's above other elements */
 }
 
 .back-to-top.visible {
-    opacity: 1;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(66, 153, 225, 0.7);
-    }
-
-    70% {
-        box-shadow: 0 0 0 10px rgba(66, 153, 225, 0);
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(66, 153, 225, 0);
-    }
+    display: block; /* Show the button when visible */
 }
 
 .back-to-top:hover {
-    background: linear-gradient(135deg, #3182ce, #2c5282);
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(66, 153, 225, 0.4);
+    background: #6B8E23; /* Light Olive Green */
+    transform: translateY(-3px); /* Slight lift on hover */
+    box-shadow: 0 6px 15px rgba(107, 142, 35, 0.4); /* Light Olive Green */
 }
 
-/* Add Responsiveness */
-@media (min-width: 768px) {
-    header {
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .logo-container {
-        width: auto;
-    }
-
-    .menu-toggle {
-        display: none;
-    }
-
-    nav ul {
-        display: flex;
-        flex-direction: row;
-        background: transparent;
-        margin-top: 0;
-        margin-left: auto;
-        width: auto;
-        box-shadow: none;
-    }
-
-    nav ul li {
-        margin: 0 10px;
-    }
-
-    .meeting-input {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+.back-to-top:active {
+    transform: translateY(-1px); /* Slight press effect */
 }
 
-/* Add some subtle animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* About Section Styles */
+#about {
+    padding: 30px;
+    background: #FFFFFF; /* White */
+    margin: 30px auto;
+    max-width: 90%;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    text-align: left; /* Align text to the left */
 }
 
-section {
-    animation: fadeInUp 0.6s ease-out;
-    animation-fill-mode: both;
+.about-container {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    gap: 30px; /* Space between left and right sections */
 }
 
-section:nth-child(2) {
-    animation-delay: 0.2s;
+.about-left {
+    flex: 1; /* Takes 1 part of the available space */
+    text-align: center; /* Center the logo */
 }
 
-section:nth-child(3) {
-    animation-delay: 0.4s;
+.about-logo {
+    width: 330px; /* Adjust size as needed */
+    height: 300px; /* Make it a circle */
+    border-radius: 30%; /* Shape it into a circle */
+    overflow: hidden;
+    background: #556B2F; /* Olive Green */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.about-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-right {
+    flex: 2; /* Takes 2 parts of the available space */
+}
+
+.about-name {
+    font-size: 50px; /* Adjust size as needed */
+    font-weight: 600; /* Bold text */
+    color: #556B2F; /* Olive Green */
+    margin-bottom: 10px; /* Space below the name */
+}
+
+#about h2 {
+    font-size: 2rem;
+    margin-bottom: 20px; /* Space below the heading */
+    color: #000000; /* Black */
+    font-weight: 600;
+}
+
+#about p {
+    font-size: 1rem;
+    color: #000000; /* Black */
+    line-height: 1.6; /* Improve readability */
 }

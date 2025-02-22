@@ -145,5 +145,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     menuToggle.addEventListener("click", function () {
         nav.classList.toggle("active");
+        menuToggle.innerHTML = nav.classList.contains("active") ? "×" : "☰";
     });
-});
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function (e) {
+        if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+            nav.classList.remove("active");
+            menuToggle.innerHTML = "☰";
+        }
+    });
+
+    // Close menu when window is resized to desktop view
+    window.addEventListener("resize", function () {
+        if (window.innerWidth >= 768) {
+            nav.classList.remove("active");
+            menuToggle.innerHTML = "☰";
+        }
+    });
+});         
