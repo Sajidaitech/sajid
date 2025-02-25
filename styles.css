@@ -36,7 +36,6 @@ header {
 /* Navigation styles */
 nav {
     margin-left: auto;
-    /* Pushes nav to the right */
 }
 
 .nav-links {
@@ -134,13 +133,11 @@ nav {
 .about-container {
     display: flex;
     align-items: center;
-    /* Center items vertically */
     gap: 3rem;
     padding: 6rem 2rem 2rem;
-    background-color: white;
+    background: linear-gradient(135deg, #ffffff 10%, #595757 90%);
     margin-top: 60px;
     max-width: 1200px;
-    /* Limit width for better readability */
     margin-left: auto;
     margin-right: auto;
 }
@@ -166,40 +163,29 @@ nav {
 .about-right {
     flex: 2;
     padding-left: 3rem;
-    /* Add space between the line and text */
 }
 
-/* Vertical line divider */
 .divider {
     width: 2px;
-    /* Line thickness */
     height: 250px;
-    /* Match the height of the image */
     background-color: #e1e1e1;
-    /* Light gray color */
     margin: 0 2rem;
-    /* Space between image and line */
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .about-container {
         flex-direction: column;
-        /* Stack items vertically on smaller screens */
         text-align: center;
         padding: 4rem 1rem 2rem;
     }
 
     .about-right {
         padding-left: 0;
-        /* Remove padding on smaller screens */
         margin-top: 2rem;
-        /* Add space between image and text */
     }
 
     .divider {
         display: none;
-        /* Hide the line on smaller screens */
     }
 }
 
@@ -214,7 +200,7 @@ section {
 }
 
 h2 {
-    color: #2c3e50;
+    color: #000000;
     margin-bottom: 1.5rem;
     font-size: 2rem;
     position: relative;
@@ -228,7 +214,7 @@ h2::after {
     left: 0;
     width: 60px;
     height: 3px;
-    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    background: white;
 }
 
 /* Gallery styles */
@@ -273,30 +259,23 @@ h2::after {
 .contact-section {
     padding: 30px;
     background: #FFFFFF;
-    /* White */
     margin: 20px auto;
     max-width: 90%;
     border-radius: 16px;
-    /* Rounded corners */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    /* Subtle shadow */
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     border: 1px solid rgba(226, 232, 240, 0.8);
-    /* Light border */
 }
 
 .contact-section:hover {
     transform: translateY(-8px);
-    /* Slight lift on hover */
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    /* Enhanced shadow on hover */
 }
 
 .contact-section h2 {
     font-size: 2rem;
     margin-bottom: 20px;
     color: #000000;
-    /* Black */
     font-weight: 600;
     position: relative;
     display: inline-block;
@@ -308,7 +287,6 @@ h2::after {
     height: 3px;
     width: 60%;
     background: #556B2F;
-    /* Olive Green */
     bottom: -10px;
     left: 20%;
     border-radius: 2px;
@@ -322,19 +300,16 @@ h2::after {
     margin-bottom: 15px;
     font-size: 1rem;
     color: #000000;
-    /* Black */
 }
 
 .contact-label {
     font-weight: 600;
     color: #556B2F;
-    /* Olive Green */
     margin-right: 10px;
 }
 
 .contact-value {
     color: #333;
-    /* Dark Gray */
 }
 
 .connect-section {
@@ -345,7 +320,6 @@ h2::after {
     font-size: 1.5rem;
     margin-bottom: 15px;
     color: #000000;
-    /* Black */
     font-weight: 600;
 }
 
@@ -353,21 +327,17 @@ h2::after {
     display: flex;
     justify-content: center;
     gap: 20px;
-    /* Space between icons */
 }
 
 .social-icon {
     font-size: 24px;
     color: #556B2F;
-    /* Olive Green */
     transition: all 0.3s ease;
 }
 
 .social-icon:hover {
     color: #6B8E23;
-    /* Light Olive Green */
     transform: translateY(-5px);
-    /* Slight lift on hover */
 }
 
 /* Social Media Section */
@@ -433,8 +403,6 @@ h2::after {
 .icons a:hover .fa-instagram,
 .icons a:hover .fa-whatsapp {
     color: white;
-    font-size: 1rem;
-    margin: 0 auto;
 }
 
 /* Responsive Styles */
@@ -604,4 +572,108 @@ input[readonly] {
 
 section {
     animation: fadeIn 0.6s ease-out;
+}
+
+footer {
+    display: block;
+}
+
+/* Footer Styles */
+footer {
+    background: linear-gradient(135deg, #000000 50%, #434344 50%);
+    color: #ffffff;
+    padding: 40px 20px;
+    margin-top: 40px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-left,
+.footer-right,
+.footer-social {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-left h3,
+.footer-right h3,
+.footer-social h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.footer-left p {
+    font-size: 1rem;
+    color: #a0a0a0;
+    line-height: 1.6;
+}
+
+.footer-right ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-right ul li {
+    margin-bottom: 10px;
+}
+
+.footer-right ul li a {
+    color: #a0a0a0;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-right ul li a:hover {
+    color: #ffffff;
+}
+
+.footer-social .social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social .social-icons a {
+    color: #a0a0a0;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer-social .social-icons a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-left,
+    .footer-right,
+    .footer-social {
+        margin-bottom: 20px;
+    }
+
+    .footer-social .social-icons {
+        justify-content: center;
+    }
 }
