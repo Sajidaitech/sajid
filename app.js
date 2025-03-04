@@ -134,3 +134,14 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("One or more elements are missing from the DOM.");
     }
 });
+// Mobile Menu Toggle
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener("click", function () {
+            navLinks.classList.toggle("active");
+        });
+    }
+});
