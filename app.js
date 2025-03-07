@@ -133,15 +133,26 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.error("One or more elements are missing from the DOM.");
     }
-});
-// Mobile Menu Toggle
-document.addEventListener("DOMContentLoaded", function () {
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
 
-    if (menuToggle && navLinks) {
-        menuToggle.addEventListener("click", function () {
-            navLinks.classList.toggle("active");
+    // Dropdown functionality
+    const blogLink = document.getElementById('blogLink');
+    const blogDropdown = document.getElementById('blogDropdown');
+
+    if (blogLink && blogDropdown) {
+        blogLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            blogDropdown.classList.toggle('active'); // Toggle the dropdown visibility
+            blogLink.classList.toggle('active'); // Toggle active class on the link
         });
+
+        // Optional: Close the dropdown when clicking outside of it
+        document.addEventListener('click', function(event) {
+            if (!blogLink.contains(event.target) && !blogDropdown.contains(event.target)) {
+                blogDropdown.classList.remove('active');
+                blogLink.classList.remove('active'); // Remove active class from the link
+            }
+        });
+    } else {
+        console.error("Blog link or dropdown elements are missing from the DOM.");
     }
 });
