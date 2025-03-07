@@ -1,6 +1,6 @@
 // Import Firebase modules using ES6 modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -17,32 +17,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Enable/Disable Edit Mode
-document.getElementById('edit-mode-toggle').addEventListener('click', function () {
+// Function to toggle edit mode
+document.addEventListener("DOMContentLoaded", function () {
+    const editToggle = document.getElementById('edit-mode-toggle');
     const dateInput = document.getElementById('meeting-date');
     const timeInput = document.getElementById('meeting-time');
     const notesInput = document.getElementById('meeting-notes');
     const addButton = document.getElementById('add-meeting-button');
     const resetButton = document.getElementById('reset-history-button');
 
-    if (dateInput.disabled) {
-        dateInput.disabled = false;
-        timeInput.disabled = false;
-        notesInput.disabled = false;
-        addButton.disabled = false;
-        resetButton.disabled = false;
-        this.textContent = 'Disable Edit Mode';
-    } else {
-        dateInput.disabled = true;
-        timeInput.disabled = true;
-        notesInput.disabled = true;
-        addButton.disabled = true;
-        resetButton.disabled = true;
-        this.textContent = 'Enable Edit Mode';
+    if (editToggle && dateInput && timeInput && notesInput && addButton && resetButton) {
+        editToggle.addEventListener('click', function () {
+            const isDisabled = dateInput.disabled;
+            dateInput.disabled = timeInput.disabled = notesInput.disabled = addButton.disabled = resetButton.disabled = !isDisabled;
+            editToggle.textContent = isDisabled ? 'Disable Edit Mode' : 'Enable Edit Mode';
+        });
     }
 });
 
-// Add Meeting to Firestore
+// Function to add a meeting to Firestore
 async function addMeeting() {
     const date = document.getElementById('meeting-date').value;
     const time = document.getElementById('meeting-time').value;
@@ -56,18 +49,17 @@ async function addMeeting() {
     try {
         await addDoc(collection(db, 'meetings'), { date, time, notes });
         alert('Meeting saved successfully!');
-        displayMeetings(); // Refresh the meeting list
+        displayMeetings();
     } catch (error) {
         console.error('Error saving meeting: ', error);
     }
 
-    // Clear input fields after adding
     document.getElementById('meeting-date').value = '';
     document.getElementById('meeting-time').value = '';
     document.getElementById('meeting-notes').value = '';
 }
 
-// Reset Meeting History in Firestore
+// Function to reset meeting history in Firestore
 async function resetHistory() {
     if (!confirm('Are you sure you want to reset the meeting history?')) return;
 
@@ -76,18 +68,18 @@ async function resetHistory() {
         querySnapshot.forEach(async (doc) => {
             await deleteDoc(doc.ref);
         });
-        displayMeetings(); // Refresh the meeting list
+        displayMeetings();
     } catch (error) {
         console.error('Error resetting history: ', error);
     }
 }
 
-// Display Meetings from Firestore
+// Function to display meetings from Firestore
 async function displayMeetings() {
     const meetingLog = document.getElementById('meeting-log');
     if (!meetingLog) return;
 
-    meetingLog.innerHTML = ''; // Clear existing content
+    meetingLog.innerHTML = '';
 
     try {
         const querySnapshot = await getDocs(collection(db, 'meetings'));
@@ -102,7 +94,7 @@ async function displayMeetings() {
     }
 }
 
-// Mobile Menu Toggle
+// Function to handle the mobile menu toggle
 document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector(".nav-links");
@@ -110,11 +102,18 @@ document.addEventListener("DOMContentLoaded", function () {
     if (menuToggle && navLinks) {
         menuToggle.addEventListener("click", function () {
             navLinks.classList.toggle("active");
+
+            // Ensure menu opens fully by setting display block
+            if (navLinks.classList.contains("active")) {
+                navLinks.style.display = "flex";
+            } else {
+                navLinks.style.display = "none";
+            }
         });
     }
 });
 
-// Ensure elements exist before modifying them
+// Ensure elements exist before adding event listeners
 document.addEventListener("DOMContentLoaded", function () {
     const dateInput = document.getElementById("meeting-date");
     const timeInput = document.getElementById("meeting-time");
@@ -124,28 +123,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const meetingLog = document.getElementById("meeting-log");
 
     if (dateInput && timeInput && notesInput && addButton && resetButton && meetingLog) {
-        // Add event listeners
         addButton.addEventListener("click", addMeeting);
         resetButton.addEventListener("click", resetHistory);
-
-        // Load meetings on page load
         displayMeetings();
     } else {
         console.error("One or more elements are missing from the DOM.");
     }
 
-    // Dropdown functionality
+    // Dropdown functionality for the blog section
     const blogLink = document.getElementById('blogLink');
     const blogDropdown = document.getElementById('blogDropdown');
 
     if (blogLink && blogDropdown) {
         blogLink.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default link behavior
-            blogDropdown.classList.toggle('active'); // Toggle the dropdown visibility
-            blogLink.classList.toggle('active'); // Toggle active class on the link
+            event.preventDefault(); // Prevent default link behavior
+            blogDropdown.classList.toggle('active'); // Toggle dropdown visibility
+            blogLink.classList.toggle('active'); // Toggle active class on link
         });
 
-        // Optional: Close the dropdown when clicking outside of it
+        // Close dropdown when clicking outside of it
         document.addEventListener('click', function(event) {
             if (!blogLink.contains(event.target) && !blogDropdown.contains(event.target)) {
                 blogDropdown.classList.remove('active');
